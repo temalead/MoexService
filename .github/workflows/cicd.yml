@@ -54,16 +54,17 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USERNAME }}
           -p ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build & push Docker image
+      - name: Build
         uses: docker/build-push-action@v4
         with:
           context: .
           builder: ${{ steps.buildx.outputs.name }}
           file: Dockerfile
-          push: true
           tags: ${{ steps.prep.outputs.tagged_image }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
+      - name: Pushing
+        run: docker push nikulinme/moex-bond-service
       - name: Move cache
         run: |
           rm -rf /tmp/.buildx-cache
