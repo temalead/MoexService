@@ -32,7 +32,7 @@ jobs:
         id: prep
         uses: redhat-actions/buildah-build@v2
         with:
-          image: myuser/myimage
+          image: nikulinme/moex-bond-service
           tags: latest
           dockerfiles: |
             ./Dockerfile
