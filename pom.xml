@@ -94,7 +94,7 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>MoexBondService</finalName>
+        <finalName>moex-bond-service</finalName>
     </build>
 
 </project>
