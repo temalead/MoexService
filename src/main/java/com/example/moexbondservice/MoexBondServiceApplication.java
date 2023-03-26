@@ -10,6 +10,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableCaching
 public class MoexBondServiceApplication {
 
+
     public static void main(String[] args) {
         SpringApplication.run(MoexBondServiceApplication.class, args);
     }
