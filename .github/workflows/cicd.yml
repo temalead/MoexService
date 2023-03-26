@@ -68,7 +68,9 @@ jobs:
       - name: Build Docker image
         run: docker build -t $REPO:latest -t $REPO:${GITHUB_SHA::8} .
       - name: Pushing
-        run: docker push $REPO
+        run: |
+          docker tag $REPO:latest $REPO:latest
+          docker push $REPO
       - name: Move cache
         run: |
           rm -rf /tmp/.buildx-cache
