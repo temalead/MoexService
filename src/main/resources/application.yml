@@ -16,3 +16,7 @@ spring:
   cache:
     caffeine:
       spec: maximumSize=48,expireAfterAccess=1h
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
