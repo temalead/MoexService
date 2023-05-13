@@ -1,18 +1,20 @@
-package com.example.moexbondservice;
+package com.example.moexbondservice
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
+import org.springframework.cache.annotation.EnableCaching
+import org.springframework.cloud.openfeign.EnableFeignClients
 
 @SpringBootApplication
 @EnableFeignClients
 @EnableCaching
-public class MoexBondServiceApplication {
+open class MoexBondServiceApplication {
 
-
-    public static void main(String[] args) {
-        SpringApplication.run(MoexBondServiceApplication.class, args);
+    companion object {
+        @JvmStatic
+        fun main(args: Array<String>) {
+            runApplication<MoexBondServiceApplication>(*args)
+        }
     }
 
 }

@@ -1,7 +1,3 @@
-package com.example.moexbondservice.exception;
+package com.example.moexbondservice.exception
 
-public class BondParsingException extends RuntimeException {
-    public BondParsingException(Exception ex) {
-        super(ex);
-    }
-}
+class BondParsingException(ex: Exception?) : RuntimeException(ex)

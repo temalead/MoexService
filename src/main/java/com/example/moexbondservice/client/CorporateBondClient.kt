@@ -1,11 +1,10 @@
-package com.example.moexbondservice.client;
+package com.example.moexbondservice.client
 
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.cloud.openfeign.FeignClient
+import org.springframework.web.bind.annotation.GetMapping
 
-@FeignClient(name = "corporateBonds", url = "${moex.bonds.corporate.url}", configuration = FeignConfig.class)
-public interface CorporateBondClient {
-
+@FeignClient(name = "corporateBonds", url = "\${moex.bonds.corporate.url}", configuration = [FeignConfig::class])
+interface CorporateBondClient {
     @GetMapping
-    String getBondsFromMoex();
+    fun getBondsFromMoex(): String
 }

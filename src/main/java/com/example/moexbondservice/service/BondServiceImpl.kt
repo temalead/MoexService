@@ -1,75 +1,64 @@
-package com.example.moexbondservice.service;
+package com.example.moexbondservice.service
 
-import com.example.moexbondservice.dto.*;
-import com.example.moexbondservice.model.Currency;
-import com.example.moexbondservice.model.Stock;
-import com.example.moexbondservice.service.utils.CorporateBondService;
-import com.example.moexbondservice.service.utils.GovernmentBondService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Stream;
+import com.example.moexbondservice.dto.*
+import com.example.moexbondservice.model.Currency
+import com.example.moexbondservice.model.Stock
+import com.example.moexbondservice.service.utils.CorporateBondService
+import com.example.moexbondservice.service.utils.GovernmentBondService
+import org.springframework.stereotype.Service
+import java.math.BigDecimal
+import java.util.stream.Stream
 
 @Service
-@RequiredArgsConstructor
-@Slf4j
-public class BondServiceImpl implements BondService{
-    private final CorporateBondService corporateBondService;
-    private final GovernmentBondService governmentBondService;
-
-    @Override
-    public StocksDto getBondsFromMoex(TickersDto tickers) {
-        List<BondDto> allBonds = getAllBonds();
-
-        return new StocksDto(allBonds.stream()
-                .filter(bond -> isContainsBondInTickers(tickers, bond.ticker()))
-                .map(this::createStock)
-                .toList());
+class BondServiceImpl(
+    private val corporateBondService: CorporateBondService,
+    private val governmentBondService: GovernmentBondService
+) : BondService {
+    override fun getBondsFromMoex(tickers: TickersDto): StocksDto {
+        val allBonds = allBonds()
+        return StocksDto(
+            allBonds.stream()
+                .filter { bond: BondDto? -> isContainsBondInTickers(tickers, bond!!.ticker) }
+                .map { bondDto: BondDto? -> createStock(bondDto) }
+                .toList())
     }
 
-    private List<BondDto> getAllBonds() {
+    private fun allBonds(): List<BondDto?> {
         return Stream.of(
-                        governmentBondService.getGovernmentBonds(),
-                        corporateBondService.getCorporateBonds()
-                )
-                .flatMap(Collection::stream)
-                .toList();
+            governmentBondService.getGovernmentBonds(),
+            corporateBondService.getCorporateBonds()
+        )
+            .flatMap { obj: List<BondDto?>? -> obj!!.stream() }
+            .toList()
     }
 
-    @Override
-    public StockPricesDto getPricesByFigies(TickersDto tickers) {
-        List<BondDto> allBonds = getAllBonds();
-
-        return new StockPricesDto(allBonds.stream()
-                .map(this::createStockPrice)
-                .toList());
+    override fun getPricesByTickers(figies: TickersDto?): StockPricesDto {
+        val allBonds = allBonds()
+        return StockPricesDto(allBonds.stream()
+            .map { bond: BondDto? -> createStockPrice(bond) }
+            .toList())
     }
 
-    private StockPriceDto createStockPrice(BondDto bond) {
-        return new StockPriceDto(percentToRealPrice(bond), bond.ticker());
+    private fun createStockPrice(bond: BondDto?): StockPriceDto {
+        return StockPriceDto(percentToRealPrice(bond), bond!!.ticker)
     }
 
-    private BigDecimal percentToRealPrice(BondDto bond) {
-        return bond.price().multiply(BigDecimal.TEN);
+    private fun percentToRealPrice(bond: BondDto?): BigDecimal {
+        return bond!!.price.multiply(BigDecimal.TEN)
     }
 
-    private static boolean isContainsBondInTickers(TickersDto tickers, String bondTicker) {
-        return tickers.tickers().contains(bondTicker);
+    private fun createStock(bondDto: BondDto?): Stock {
+        return Stock.Builder()
+            .name(bondDto!!.name)
+            .type("Bond")
+            .figi(bondDto.ticker)
+            .ticker(bondDto.ticker)
+            .currency(Currency.RUB)
+            .source("MOEX")
+            .build()
     }
 
-
-    private Stock createStock(BondDto bondDto) {
-        return Stock.builder()
-                .name(bondDto.name())
-                .type("Bond")
-                .figi(bondDto.ticker())
-                .ticker(bondDto.ticker())
-                .currency(Currency.RUB)
-                .source("MOEX")
-                .build();
+    private fun isContainsBondInTickers(tickers: TickersDto, bondTicker: String): Boolean {
+        return tickers.tickers.contains(bondTicker)
     }
 }

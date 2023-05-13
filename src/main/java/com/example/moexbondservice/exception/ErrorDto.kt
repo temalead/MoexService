@@ -1,4 +1,3 @@
-package com.example.moexbondservice.exception;
+package com.example.moexbondservice.exception
 
-public record ErrorDto(String message) {
-}
+data class ErrorDto(val message: String)

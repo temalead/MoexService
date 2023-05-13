@@ -1,5 +1,6 @@
-package com.example.moexbondservice.service.utils;
+package com.example.moexbondservice.service.utils
 
-public enum BondType {
-    GOVERNMENT, CORPORATE
+enum class BondType {
+    GOVERNMENT,
+    CORPORATE
 }

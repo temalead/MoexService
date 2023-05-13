@@ -1,25 +1,25 @@
-package com.example.moexbondservice.service.utils;
+package com.example.moexbondservice.service.utils
 
-import com.example.moexbondservice.exception.LimitMoexRequestExceededException;
-import com.example.moexbondservice.service.utils.MoexBondValidator;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.example.moexbondservice.dto.BondDto
+import com.example.moexbondservice.exception.LimitMoexRequestExceededException
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
-import java.util.List;
-
-class MoexBondValidatorTest {
-
-    private MoexBondValidator moexBondValidator;
-
+internal class MoexBondValidatorTest {
+    private var moexBondValidator: MoexBondValidator? = null
     @BeforeEach
-    public void setUp() {
-        moexBondValidator = new MoexBondValidator();
+    fun setUp() {
+        moexBondValidator = MoexBondValidator()
     }
+
     @Test
-    void validateMoexLimitation() {
+    fun validateMoexLimitation() {
         Assertions
-                .assertThrows(LimitMoexRequestExceededException.class, () ->
-        moexBondValidator.validateMoexLimitation(List.of()));
+            .assertThrows(LimitMoexRequestExceededException::class.java) {
+                moexBondValidator!!.validateMoexLimitation(
+                    listOf<BondDto>()
+                )
+            }
     }
 }

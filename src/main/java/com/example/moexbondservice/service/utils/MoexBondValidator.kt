@@ -1,21 +1,17 @@
-package com.example.moexbondservice.service.utils;
+package com.example.moexbondservice.service.utils
 
-import com.example.moexbondservice.dto.BondDto;
-import com.example.moexbondservice.exception.LimitMoexRequestExceededException;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
+import com.example.moexbondservice.dto.BondDto
+import com.example.moexbondservice.exception.LimitMoexRequestExceededException
+import mu.KotlinLogging
+import org.springframework.stereotype.Service
 
 @Service
-@Slf4j
-public class MoexBondValidator {
-
-    public void validateMoexLimitation(List<BondDto> bonds) {
-        if (bonds.isEmpty()) {
-            log.error("Exceeded limits of MOEX requests");
-            throw new LimitMoexRequestExceededException("Exceeded limits of MOEX requests");
+class MoexBondValidator {
+    private val log = KotlinLogging.logger{}
+    fun validateMoexLimitation(bonds: List<BondDto?>?) {
+        if (bonds!!.isEmpty()) {
+            log.error("Exceeded limits of MOEX requests")
+            throw LimitMoexRequestExceededException("Exceeded limits of MOEX requests")
         }
     }
-
 }

@@ -1,7 +1,4 @@
-package com.example.moexbondservice.exception;
+package com.example.moexbondservice.exception
 
-public class LimitMoexRequestExceededException extends RuntimeException {
-    public LimitMoexRequestExceededException(String exceededLimitsOfMoexRequests) {
-        super(exceededLimitsOfMoexRequests);
-    }
-}
+class LimitMoexRequestExceededException(exceededLimitsOfMoexRequests: String?) :
+    RuntimeException(exceededLimitsOfMoexRequests)

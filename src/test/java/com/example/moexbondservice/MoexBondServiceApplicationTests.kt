@@ -1,13 +1,11 @@
-package com.example.moexbondservice;
+package com.example.moexbondservice
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.Test
+import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class MoexBondServiceApplicationTests {
-
+internal class MoexBondServiceApplicationTests {
     @Test
-    void contextLoads() {
+    fun contextLoads() {
     }
-
 }

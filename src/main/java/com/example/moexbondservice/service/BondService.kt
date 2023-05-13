@@ -1,11 +1,10 @@
-package com.example.moexbondservice.service;
+package com.example.moexbondservice.service
 
-import com.example.moexbondservice.dto.StockPricesDto;
-import com.example.moexbondservice.dto.StocksDto;
-import com.example.moexbondservice.dto.TickersDto;
+import com.example.moexbondservice.dto.StockPricesDto
+import com.example.moexbondservice.dto.StocksDto
+import com.example.moexbondservice.dto.TickersDto
 
-public interface BondService {
-    StocksDto getBondsFromMoex(TickersDto tickers);
-
-    StockPricesDto getPricesByFigies(TickersDto figies);
+interface BondService {
+    fun getBondsFromMoex(tickers: TickersDto): StocksDto
+    fun getPricesByTickers(figies: TickersDto?): StockPricesDto
 }

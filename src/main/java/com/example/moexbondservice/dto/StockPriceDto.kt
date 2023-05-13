@@ -1,6 +1,5 @@
-package com.example.moexbondservice.dto;
+package com.example.moexbondservice.dto
 
-import java.math.BigDecimal;
+import java.math.BigDecimal
 
-public record StockPriceDto(BigDecimal price, String ticker) {
-}
+data class StockPriceDto(val price: BigDecimal, val ticker: String)

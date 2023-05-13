@@ -1,6 +1,3 @@
-package com.example.moexbondservice.dto;
+package com.example.moexbondservice.dto
 
-import java.util.List;
-
-public record TickersDto(List<String> tickers) {
-}
+data class TickersDto(val tickers: List<String>)

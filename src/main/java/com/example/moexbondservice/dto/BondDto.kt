@@ -1,8 +1,10 @@
-package com.example.moexbondservice.dto;
+package com.example.moexbondservice.dto
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat
+import java.math.BigDecimal
 
-import java.math.BigDecimal;
-
-public record BondDto(String ticker, String name, @JsonFormat(shape = JsonFormat.Shape.STRING) BigDecimal price) {
-}
+data class BondDto(
+    val ticker: String,
+    val name: String,
+    @field:JsonFormat(shape = JsonFormat.Shape.STRING) @param:JsonFormat(shape = JsonFormat.Shape.STRING) val price: BigDecimal
+)

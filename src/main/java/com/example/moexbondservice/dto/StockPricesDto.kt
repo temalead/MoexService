@@ -1,6 +1,3 @@
-package com.example.moexbondservice.dto;
+package com.example.moexbondservice.dto
 
-import java.util.List;
-
-public record StockPricesDto(List<StockPriceDto> stock) {
-}
+data class StockPricesDto(val stock: List<StockPriceDto>)

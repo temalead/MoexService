@@ -1,10 +1,7 @@
-package com.example.moexbondservice.service.utils;
+package com.example.moexbondservice.service.utils
 
-import com.example.moexbondservice.dto.BondDto;
+import com.example.moexbondservice.dto.BondDto
 
-import java.util.List;
-
-public interface BondParser {
-
-    List<BondDto> parse(String ratesAsString);
+interface BondParser {
+    fun parse(ratesAsString: String?): List<BondDto>
 }
